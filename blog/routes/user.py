@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+from starlette.status import HTTP_201_CREATED
 from ..schemas import User, ShowUser
 from ..database import get_db
 from ..functions import user
@@ -8,7 +9,7 @@ from ..functions import user
 router = APIRouter(prefix="/user", tags=["users"])
 
 
-@router.post("/")
+@router.post("/", status_code=HTTP_201_CREATED)
 def create_user(request: User, db: Session = Depends(get_db)):
     return user.create(request, db)
 

@@ -47,7 +47,6 @@ def all_fetch(
 
 @router.get(
     "/{id}",
-    status_code=status.HTTP_200_OK,
     response_model=ShowBlog,
 )
 def show(id: int, db: Session = Depends(get_db)):

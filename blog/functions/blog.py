@@ -52,4 +52,4 @@ def update(id: int, request: Blog, db: Session):
         )
     blog.update(request.dict())
     db.commit()
-    return "update"
+    return blog.first()

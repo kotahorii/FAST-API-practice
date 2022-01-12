@@ -1,10 +1,15 @@
-from typing import List, Optional
+from typing import Optional
 from pydantic import BaseModel
 
 
 class BlogBase(BaseModel):
     title: str
     body: str
+
+
+class Creator(BaseModel):
+    name: str
+    email: str
 
 
 class User(BaseModel):
@@ -24,16 +29,15 @@ class Blog(BlogBase):
 class ShowUser(BaseModel):
     name: str
     email: str
-    blogs: List[Blog] = []
 
     class Config:
         orm_mode = True
 
 
 class ShowBlog(BaseModel):
+    user_id: int
     title: str
     body: str
-    creator: ShowUser
 
     class Config:
         orm_mode = True

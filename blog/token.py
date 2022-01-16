@@ -1,26 +1,22 @@
-from typing import Optional
 from datetime import datetime, timedelta
-from jose import jwt, JWTError
-from .functions.user import show
+from typing import Optional
+
+from jose import JWTError, jwt
 from sqlalchemy.orm import Session
 
-SECRET_KEY = (
-    "efe08c92decfa8709c2f9acd8ada4bef87d7fe40e89f647cd4b9b0c4c6c0dbf5"
-)
+from .functions.user import show
+
+SECRET_KEY = "efe08c92decfa8709c2f9acd8ada4bef87d7fe40e89f647cd4b9b0c4c6c0dbf5"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 
-def create_access_token(
-    data: dict, expires_delta: Optional[timedelta] = None
-):
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(
-            minutes=ACCESS_TOKEN_EXPIRE_MINUTES
-        )
+        expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt

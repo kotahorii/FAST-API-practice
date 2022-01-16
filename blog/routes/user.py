@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_201_CREATED
-from ..schemas import User, ShowUser
+
 from ..database import get_db
 from ..functions import user
-
+from ..schemas import ShowUser, User
 
 router = APIRouter(prefix="/user", tags=["users"])
 

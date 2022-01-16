@@ -1,8 +1,9 @@
-from fastapi import status, HTTPException
-from .. import models
-from ..schemas import User
+from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
+
+from .. import models
 from ..hashing import Hash
+from ..schemas import User
 
 
 def create(request: User, db: Session):
